@@ -1,0 +1,1374 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kedai Sajodo | Pesan Jajan Lewat WhatsApp</title>
+    <meta
+      name="description"
+      content="Pilih menu makanan dan minuman favoritmu di Kedai Sajodo, lalu kirim pesanan langsung lewat WhatsApp. Tanpa antre, tanpa ribet."
+    />
+    <meta name="theme-color" content="#C89B72" />
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg" />
+
+    <!-- Open Graph (pratinjau saat link dibagikan).
+         Tambahkan og:image dan og:url dengan alamat lengkap (https://...) setelah situs dipublikasikan -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content="Kedai Sajodo" />
+    <meta
+      property="og:title"
+      content="Kedai Sajodo | Pesan Jajan Lewat WhatsApp"
+    />
+    <meta
+      property="og:description"
+      content="Pilih menu makanan dan minuman favoritmu di Kedai Sajodo, lalu kirim pesanan langsung lewat WhatsApp."
+    />
+
+    <!-- Schema Markup (JSON-LD) untuk usaha makanan lokal -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Kedai Sajodo",
+        "description": "Kedai seblak, mie, basreng, tahu krispi, dan aneka cemilan. Pesan lewat WhatsApp untuk take away atau datang langsung untuk dine in.",
+        "telephone": "+6283143372117",
+        "servesCuisine": ["Indonesian", "Seblak", "Snack"],
+        "priceRange": "Rp5.000 - Rp50.000",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Jl. Cibiru Hilir No.23, RT.01/RW.02, Cibiru Hilir, Kec. Cileunyi",
+          "addressLocality": "Bandung",
+          "addressRegion": "Jawa Barat",
+          "postalCode": "40626",
+          "addressCountry": "ID"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -6.93820580723431,
+          "longitude": 107.72235167153192
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "10:00",
+            "closes": "22:00"
+          }
+        ],
+        "sameAs": ["https://instagram.com/kedaiSajodo"]
+      }
+    </script>
+
+    <!-- Font Montserrat di-host sendiri (tanpa request ke Google Fonts) -->
+    <link
+      rel="preload"
+      href="fonts/montserrat-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- Gambar utama (LCP): diunduh lebih awal -->
+    <link rel="preload" as="image" href="img/person.png" fetchpriority="high" />
+
+    <!-- CSS hasil build (Tailwind + daisyUI). Lihat README-build.md untuk cara membangun ulang -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body class="scroll-smooth bg-[#F5EFE6] text-[#2B1A10]">
+    <!-- ================= NAVBAR ================= -->
+    <header
+      class="navbar sticky top-0 z-50 bg-[#F5EFE6] border-b border-[#4E3020]/10 shadow-sm px-4 lg:px-16"
+    >
+      <div class="navbar-start">
+        <div class="dropdown" id="dropdown-nav">
+          <!-- div role=button (bukan <button>) agar dropdown andal di Safari/iOS -->
+          <div
+            tabindex="0"
+            role="button"
+            class="btn btn-ghost text-[#4E3020] lg:hidden"
+            aria-label="Buka menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </div>
+          <ul
+            tabindex="0"
+            class="dropdown-content flex flex-col gap-1 bg-[#F5EFE6] text-[#4E3020] text-sm font-semibold rounded-box z-10 mt-3 w-60 p-2 shadow"
+          >
+            <li>
+              <a
+                href="#beranda"
+                class="nav-link block rounded-lg px-3 py-2 hover:bg-[#4E3020]/10"
+                >Beranda</a
+              >
+            </li>
+            <li>
+              <a
+                href="#produk"
+                class="nav-link block rounded-lg px-3 py-2 hover:bg-[#4E3020]/10"
+                >Produk</a
+              >
+            </li>
+            <li>
+              <a
+                href="#tentang"
+                class="nav-link block rounded-lg px-3 py-2 hover:bg-[#4E3020]/10"
+                >Tentang</a
+              >
+            </li>
+            <li>
+              <a
+                href="#keunggulan"
+                class="nav-link block rounded-lg px-3 py-2 hover:bg-[#4E3020]/10"
+                >Keunggulan</a
+              >
+            </li>
+            <!-- Tombol WhatsApp versi HP (di desktop tombolnya ada di kanan navbar) -->
+            <li class="mt-2">
+              <a
+                href="#"
+                data-wa
+                data-pesan="Halo Kedai Sajodo, saya mau pesan"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-sm w-full bg-[#4E3020] hover:bg-[#3A2417] text-white border-0 gap-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 12c0 4.556-4.03 8.25-9 8.25a9.76 9.76 0 0 1-2.555-.337A5.97 5.97 0 0 1 5.41 20.97a5.97 5.97 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"
+                  />
+                </svg>
+                <span>Pesan via WhatsApp</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Logo versi desktop (di kiri) -->
+        <a
+          href="#beranda"
+          class="hidden lg:block shrink-0"
+          aria-label="Kedai Sajodo, ke beranda"
+        >
+          <img src="img/logo.svg" alt="Kedai Sajodo" class="h-16 w-auto" />
+        </a>
+      </div>
+
+      <nav class="navbar-center hidden lg:flex" aria-label="Menu utama">
+        <ul class="flex items-center gap-2 text-[#4E3020] font-semibold">
+          <li>
+            <a
+              href="#beranda"
+              class="nav-link block rounded-lg px-4 py-2 hover:bg-[#4E3020]/10"
+              >Beranda</a
+            >
+          </li>
+          <li>
+            <a
+              href="#produk"
+              class="nav-link block rounded-lg px-4 py-2 hover:bg-[#4E3020]/10"
+              >Produk</a
+            >
+          </li>
+          <li>
+            <a
+              href="#tentang"
+              class="nav-link block rounded-lg px-4 py-2 hover:bg-[#4E3020]/10"
+              >Tentang</a
+            >
+          </li>
+          <li>
+            <a
+              href="#keunggulan"
+              class="nav-link block rounded-lg px-4 py-2 hover:bg-[#4E3020]/10"
+              >Keunggulan</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <div class="navbar-end">
+        <!-- Logo versi HP (di kanan, menggantikan posisi tombol) -->
+        <a
+          href="#beranda"
+          class="lg:hidden shrink-0"
+          aria-label="Kedai Sajodo, ke beranda"
+        >
+          <img src="img/logo.svg" alt="Kedai Sajodo" class="h-12 w-auto" />
+        </a>
+
+        <!-- Tombol WhatsApp versi desktop (di HP pindah ke menu hamburger) -->
+        <a
+          href="#"
+          data-wa
+          data-pesan="Halo Kedai Sajodo, saya mau pesan"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn hidden lg:inline-flex bg-[#4E3020] hover:bg-[#3A2417] text-white border-0 gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.8"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 12c0 4.556-4.03 8.25-9 8.25a9.76 9.76 0 0 1-2.555-.337A5.97 5.97 0 0 1 5.41 20.97a5.97 5.97 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"
+            />
+          </svg>
+          <span>Pesan via WhatsApp</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ================= SECTION 1: HERO ================= -->
+      <section
+        id="beranda"
+        class="relative scroll-mt-20 overflow-hidden bg-[linear-gradient(to_right,#C89B72,#D8BFA3)]"
+      >
+        <!-- Doodle dekorasi: lazy supaya tidak diunduh di HP (disembunyikan di bawah md) -->
+        <img
+          src="img/doodleL.svg"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          class="hidden md:block absolute top-3 left-3 lg:left-6 w-28 lg:w-40 xl:w-48 opacity-80 pointer-events-none select-none"
+        />
+        <img
+          src="img/doodleR.svg"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          class="hidden md:block absolute bottom-0 right-2 lg:right-6 w-28 lg:w-40 xl:w-48 opacity-80 pointer-events-none select-none"
+        />
+
+        <div
+          class="relative z-10 grid lg:grid-cols-2 items-center px-4 lg:px-16 min-h-[460px] lg:min-h-[560px]"
+        >
+          <!-- Teks -->
+          <!-- Kata sorot memakai #7A2A0C (bukan krem) supaya kontras terhadap latar cokelat muda cukup terbaca -->
+          <div class="py-12 lg:py-16 lg:pb-36 text-center lg:text-left">
+            <h1
+              class="font-['Montserrat'] font-extrabold text-3xl sm:text-4xl xl:text-5xl leading-tight text-[#4E3020]"
+            >
+              Jajan Tinggal <span class="text-[#7A2A0C]">Klik</span>, Pesan
+              Langsung Lewat
+              <span class="text-[#7A2A0C]">WhatsApp</span>
+            </h1>
+            <p
+              class="mt-5 max-w-md mx-auto lg:mx-0 text-sm sm:text-base text-[#2B1A10]"
+            >
+              Tanpa antre, tanpa ribet. Cukup
+              <strong class="text-[#7A2A0C]">pilih menu</strong> dan
+              <strong class="text-[#7A2A0C]">kirim</strong> pesanan lewat
+              <strong class="text-[#7A2A0C]">WhatsApp.</strong>
+            </p>
+          </div>
+
+          <!-- Foto (gambar utama / LCP: dimuat lebih dulu, tidak lazy) -->
+          <div class="relative flex justify-center items-end self-end">
+            <img
+              src="img/person.png"
+              alt="Pelanggan menikmati jajanan dan minuman dari Kedai Sajodo"
+              fetchpriority="high"
+              decoding="async"
+              class="relative z-10 h-[360px] sm:h-[420px] lg:h-[520px] w-auto object-contain object-bottom"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Kartu kategori: separuh masuk ke area cokelat, separuh ke area krem -->
+      <div class="relative z-10 -mt-28 lg:-mt-32 px-4 lg:px-16 pb-4 lg:pb-6">
+        <div class="grid grid-cols-2 gap-4 sm:gap-6 max-w-xl mx-auto lg:mx-0">
+          <div>
+            <h2
+              class="font-['Montserrat'] font-bold text-sm sm:text-base text-[#1B1007] mb-2"
+            >
+              Makanan
+            </h2>
+            <a
+              href="#produk"
+              class="group relative block aspect-[5/3] rounded-xl border border-[#A86432]/40 bg-[#4A3525] text-[#2B1A10] shadow-md transition hover:-translate-y-1 hover:shadow-lg"
+              aria-label="Lihat menu makanan"
+            >
+              <!-- Panah -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute top-3 right-3 h-4 w-4 transition group-hover:translate-x-0.5 text-[#F7EEE4]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+              <!-- Ikon mangkuk -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute left-1/2 top-[45%] h-9 w-9 -translate-x-1/2 -translate-y-1/2 text-[#F7EEE4]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M8 3.5c-.9 1.1.9 1.9 0 3" />
+                <path d="M12 3.5c-.9 1.1.9 1.9 0 3" />
+                <path d="M16 3.5c-.9 1.1.9 1.9 0 3" />
+                <path d="M3 10h18a9 9 0 0 1-18 0Z" />
+                <path d="M8 21h8" />
+              </svg>
+              <span
+                class="absolute bottom-3 left-3 text-xs font-medium text-[#F5EFE6]"
+                >Lihat Menu</span
+              >
+            </a>
+          </div>
+
+          <div>
+            <h2
+              class="font-['Montserrat'] font-bold text-sm sm:text-base text-[#1B1007] mb-2"
+            >
+              Minuman
+            </h2>
+            <a
+              href="#produk"
+              class="group relative block aspect-[5/3] rounded-xl border border-[#A86432]/40 bg-[#4A3525] text-[#2B1A10] shadow-md transition hover:-translate-y-1 hover:shadow-lg"
+              aria-label="Lihat menu minuman"
+            >
+              <!-- Panah -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute top-3 right-3 h-4 w-4 transition group-hover:translate-x-0.5 text-[#F7EEE4]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+              <!-- Ikon gelas dengan sedotan -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute left-1/2 top-[45%] h-9 w-9 -translate-x-1/2 -translate-y-1/2 text-[#F7EEE4]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="m6 8 1.75 12.28a2 2 0 0 0 2 1.72h4.54a2 2 0 0 0 2-1.72L18 8"
+                />
+                <path d="M5 8h14" />
+                <path d="M7 15a6.47 6.47 0 0 1 5 0 6.47 6.47 0 0 0 5 0" />
+                <path d="m12 8 1-6h2" />
+              </svg>
+              <span
+                class="absolute bottom-3 left-3 text-xs font-medium text-[#F5EFE6]"
+                >Lihat Menu</span
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SECTION 2: MENU ================= -->
+      <section
+        id="produk"
+        class="scroll-mt-20 bg-[#F5EFE6] pt-8 pb-14 lg:pb-16"
+      >
+        <div class="max-w-6xl mx-auto px-4 lg:px-16">
+          <h2
+            class="text-center font-['Montserrat'] font-bold text-xl sm:text-2xl text-[#1B1007]"
+          >
+            Menu
+          </h2>
+
+          <!-- Filter kategori -->
+          <div
+            id="filter-menu"
+            class="mt-6 flex flex-wrap justify-center gap-2"
+            role="group"
+            aria-label="Filter kategori menu"
+          >
+            <button
+              type="button"
+              data-kategori="semua"
+              class="btn btn-sm rounded-full border-0 shadow-sm"
+            >
+              Semua
+            </button>
+            <button
+              type="button"
+              data-kategori="seblak"
+              class="btn btn-sm rounded-full border-0 shadow-sm"
+            >
+              Seblak &amp; Soteng
+            </button>
+            <button
+              type="button"
+              data-kategori="cemilan"
+              class="btn btn-sm rounded-full border-0 shadow-sm"
+            >
+              Cemilan
+            </button>
+            <button
+              type="button"
+              data-kategori="mie"
+              class="btn btn-sm rounded-full border-0 shadow-sm"
+            >
+              Mie
+            </button>
+            <button
+              type="button"
+              data-kategori="minuman"
+              class="btn btn-sm rounded-full border-0 shadow-sm"
+            >
+              Minuman
+            </button>
+          </div>
+
+          <!-- Daftar kartu menu (diisi otomatis oleh script di bagian bawah halaman).
+               min-h menahan tinggi area supaya halaman tidak "melompat" saat kartu muncul -->
+          <div
+            id="daftar-menu"
+            aria-live="polite"
+            class="mt-8 min-h-[32rem] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-x-6 lg:gap-y-8"
+          ></div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 3: TENTANG KAMI ================= -->
+      <section id="tentang" class="scroll-mt-20 bg-[#F5EFE6] pb-14 lg:pb-16">
+        <div class="mx-auto max-w-6xl px-4 lg:px-16">
+          <div
+            class="grid overflow-hidden rounded-3xl bg-[#C89B72] shadow-md lg:grid-cols-[1.1fr_1fr]"
+          >
+            <!-- Foto + lencana brand -->
+            <figure class="relative m-0 min-h-72 sm:min-h-96 lg:min-h-[26rem]">
+              <!-- Simpan foto di img/about.jpeg (rasio mendekati 4:3 / landscape) -->
+              <img
+                src="img/about.jpeg"
+                alt="Tim Kedai Sajodo berpose mengacungkan jempol di depan kedai bersama pemilik"
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 h-full w-full object-cover object-top"
+              />
+              <!-- Gradasi tipis supaya lencana terbaca di atas foto apa pun -->
+              <div
+                class="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#2B1A10]/60 to-transparent"
+                aria-hidden="true"
+              ></div>
+              <figcaption
+                class="absolute bottom-4 left-4 flex items-center gap-3 rounded-2xl bg-[#F5EFE6]/95 py-2.5 pl-3 pr-5 shadow-lg"
+              >
+                <img
+                  src="img/logo.svg"
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  class="h-10 w-auto"
+                />
+                <span
+                  class="border-l border-[#4E3020]/25 pl-3 font-['Montserrat'] text-sm font-bold leading-tight text-[#4E3020]"
+                >
+                  Dari Kami,<br />untuk Kamu
+                </span>
+              </figcaption>
+            </figure>
+
+            <!-- Teks -->
+            <div class="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+              <p
+                class="font-['Montserrat'] text-xs font-bold uppercase tracking-[0.2em] text-[#4E3020]"
+              >
+                Tentang Kami
+              </p>
+              <h2
+                class="mt-3 font-['Montserrat'] text-xl font-extrabold leading-snug text-[#1B1007] sm:text-2xl"
+              >
+                Kedai Sajodo, tempat nongkrong asyik dan makan enak tiap hari
+              </h2>
+              <p
+                class="mt-4 text-sm leading-relaxed text-[#2B1A10] sm:text-base"
+              >
+                Di Kedai Sajodo, kamu bisa menikmati seblak, mie, basreng, tahu
+                crispy, dan aneka cemilan lainnya dengan rasa yang nendang dan
+                harga yang bersahabat. Datang langsung untuk dine in, atau pesan
+                lewat WhatsApp untuk take away.
+              </p>
+
+              <!-- Info singkat -->
+              <ul class="mt-5 flex flex-wrap gap-2" aria-label="Info singkat">
+                <li
+                  class="rounded-full bg-[#F5EFE6]/80 px-3 py-1 text-xs font-semibold text-[#4E3020]"
+                >
+                  Dine in
+                </li>
+                <li
+                  class="rounded-full bg-[#F5EFE6]/80 px-3 py-1 text-xs font-semibold text-[#4E3020]"
+                >
+                  Take away
+                </li>
+                <li
+                  class="rounded-full bg-[#F5EFE6]/80 px-3 py-1 text-xs font-semibold text-[#4E3020]"
+                >
+                  Buka 10.00 - 22.00
+                </li>
+              </ul>
+
+              <a
+                href="#cara-pemesanan"
+                class="btn btn-sm mt-7 self-start gap-2 border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+              >
+                Lebih Lanjut
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 4: KENAPA PILIH KAMI ================= -->
+      <section id="keunggulan" class="scroll-mt-20 bg-white py-14 lg:py-16">
+        <div class="px-4 lg:px-16">
+          <!-- Judul -->
+          <div class="text-center max-w-3xl mx-auto">
+            <h2
+              class="font-['Montserrat'] font-bold text-xl sm:text-2xl text-[#1B1007]"
+            >
+              Kenapa Harus Pilih Kedai Sajodo?
+            </h2>
+            <p
+              class="mt-4 font-['Montserrat'] text-sm sm:text-base tracking-wide text-[#2B1A10]"
+            >
+              Menu favorit, rasa nendang, dan pelayanan terbaik yang kami
+              berikan untuk semua pelanggan
+            </p>
+          </div>
+
+          <!-- Kartu keunggulan -->
+          <div
+            class="mt-10 grid gap-6 md:grid-cols-3 lg:gap-12 max-w-6xl mx-auto"
+          >
+            <!-- Kartu 1 -->
+            <article
+              class="rounded-xl border border-gray-200 bg-white px-6 py-8 text-center"
+            >
+              <div
+                class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#C89E75] text-white"
+              >
+                <!-- Ikon stopwatch -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="10" x2="14" y1="2" y2="2" />
+                  <line x1="12" x2="15" y1="14" y2="11" />
+                  <circle cx="12" cy="14" r="8" />
+                </svg>
+              </div>
+              <h3
+                class="mt-4 font-['Montserrat'] font-bold text-base text-[#1B1007]"
+              >
+                Pesanan Cepat
+              </h3>
+              <p
+                class="mt-3 text-xs sm:text-sm leading-relaxed text-[#2B1A10]/90"
+              >
+                Tidak perlu menunggu lama, pesanan seblak, mie, dan camilan
+                favoritmu siap disajikan hangat.
+              </p>
+            </article>
+
+            <!-- Kartu 2 -->
+            <article
+              class="rounded-xl border border-gray-200 bg-white px-6 py-8 text-center"
+            >
+              <div
+                class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#C89E75] text-white"
+              >
+                <!-- Ikon sendok dan garpu -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+                  <path d="M7 2v20" />
+                  <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
+                </svg>
+              </div>
+              <h3
+                class="mt-4 font-['Montserrat'] font-bold text-base text-[#1B1007]"
+              >
+                Menu Lengkap
+              </h3>
+              <p
+                class="mt-3 text-xs sm:text-sm leading-relaxed text-[#2B1A10]/90"
+              >
+                Tersedia seblak, mie, basreng, tahu krispi, dan masih banyak
+                makanan lainnya.
+              </p>
+            </article>
+
+            <!-- Kartu 3 -->
+            <article
+              class="rounded-xl border border-gray-200 bg-white px-6 py-8 text-center"
+            >
+              <div
+                class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#C89E75] text-white"
+              >
+                <!-- Ikon api -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"
+                  />
+                </svg>
+              </div>
+              <h3
+                class="mt-4 font-['Montserrat'] font-bold text-base text-[#1B1007]"
+              >
+                Pedas Sesukamu
+              </h3>
+              <p
+                class="mt-3 text-xs sm:text-sm leading-relaxed text-[#2B1A10]/90"
+              >
+                Pilih level pedas dan topping sesuka hati, dengan harga ramah
+                kantong untuk semua kalangan.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 5: CARA PEMESANAN + LOKASI ================= -->
+      <section
+        id="cara-pemesanan"
+        class="scroll-mt-20 bg-[#F5EFE6] py-12 lg:py-16"
+      >
+        <div class="mx-auto max-w-6xl px-4 lg:px-16">
+          <h2
+            class="font-['Montserrat'] text-lg font-bold text-[#1B1007] sm:text-xl"
+          >
+            Cara Pemesanan
+          </h2>
+
+          <!-- Tiga langkah -->
+          <ol class="mt-8 grid gap-6 md:grid-cols-3 md:gap-8">
+            <li class="flex items-start gap-3">
+              <span
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#C89B72] font-['Montserrat'] text-sm font-bold text-[#4E3020]"
+                >1</span
+              >
+              <div>
+                <h3
+                  class="font-['Montserrat'] text-base font-bold text-[#4E3020]"
+                >
+                  Pilih Menu
+                </h3>
+                <p class="mt-1 text-xs text-[#2B1A10]/90 sm:text-sm">
+                  Lihat menu dan tentukan pesananmu.
+                </p>
+              </div>
+            </li>
+
+            <li class="flex items-start gap-3">
+              <span
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#C89B72] font-['Montserrat'] text-sm font-bold text-[#4E3020]"
+                >2</span
+              >
+              <div>
+                <h3
+                  class="font-['Montserrat'] text-base font-bold text-[#4E3020]"
+                >
+                  Kirim lewat WhatsApp
+                </h3>
+                <p class="mt-1 text-xs text-[#2B1A10]/90 sm:text-sm">
+                  Klik Pesan, pesan otomatis terisi.
+                </p>
+              </div>
+            </li>
+
+            <li class="flex items-start gap-3">
+              <span
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#C89B72] font-['Montserrat'] text-sm font-bold text-[#4E3020]"
+                >3</span
+              >
+              <div>
+                <h3
+                  class="font-['Montserrat'] text-base font-bold text-[#4E3020]"
+                >
+                  Terima pesanan
+                </h3>
+                <p class="mt-1 text-xs text-[#2B1A10]/90 sm:text-sm">
+                  Ambil di kedai atau minta diantar.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <!-- Kartu lokasi dan jam buka -->
+          <div
+            class="mx-auto mt-10 max-w-3xl rounded-3xl bg-white p-6 shadow-sm sm:p-8"
+          >
+            <div class="grid gap-6 md:grid-cols-2 md:gap-8">
+              <div class="flex flex-col">
+                <h3
+                  class="font-['Montserrat'] text-lg font-bold text-[#4E3020]"
+                >
+                  Lokasi dan jam buka
+                </h3>
+
+                <ul class="mt-5 space-y-4">
+                  <li class="flex gap-3">
+                    <!-- Ikon lokasi -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="mt-0.5 h-4 w-4 shrink-0 text-[#B4532A]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
+                      />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    <div
+                      class="text-xs leading-relaxed text-[#2B1A10] sm:text-sm"
+                    >
+                      <p>Alamat</p>
+                      <address class="not-italic">
+                        Jl. Cibiru Hilir No.23, RT.01/RW.02, Cibiru Hilir, Kec.
+                        Cileunyi, Kota Bandung, Jawa Barat 40626
+                      </address>
+                    </div>
+                  </li>
+
+                  <li class="flex gap-3">
+                    <!-- Ikon jam -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="mt-0.5 h-4 w-4 shrink-0 text-[#B4532A]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 6v6l4 2" />
+                    </svg>
+                    <div
+                      class="text-xs leading-relaxed text-[#2B1A10] sm:text-sm"
+                    >
+                      <p>Jam Buka</p>
+                      <p>Setiap hari, 10.00 sampai 22.00</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <a
+                  href="https://www.google.com/maps/search/?api=1&amp;query=-6.93820580723431%2C107.72235167153192"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-sm mt-6 self-start border-0 bg-[#4E3020] text-white hover:bg-[#3A2417] md:mt-auto"
+                  >Buka di Google Maps</a
+                >
+              </div>
+
+              <!-- Peta: iframe baru dimuat saat mendekati layar (lihat script) -->
+              <div
+                class="min-h-56 overflow-hidden rounded-xl bg-[#D9D9D9] md:min-h-0"
+              >
+                <iframe
+                  id="peta"
+                  title="Peta lokasi Kedai Sajodo"
+                  data-src="https://maps.google.com/maps?q=-6.93820580723431,107.72235167153192&amp;z=17&amp;output=embed"
+                  class="h-full min-h-56 w-full border-0"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-[#C89B72] text-[#4E3020]">
+      <div class="mx-auto max-w-6xl px-4 py-10 lg:px-16">
+        <div
+          class="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr]"
+        >
+          <!-- Brand -->
+          <div>
+            <a href="#beranda" aria-label="Kedai Sajodo, ke beranda">
+              <img
+                src="img/logo.svg"
+                alt="Kedai Sajodo"
+                loading="lazy"
+                class="h-20 w-auto"
+              />
+            </a>
+            <p
+              class="mt-3 max-w-[16rem] font-['Montserrat'] text-sm font-semibold leading-snug"
+            >
+              Jajan Tinggal <span class="text-[#7A2A0C]">Klik</span>, Pesan
+              Langsung Lewat <span class="text-[#7A2A0C]">WhatsApp</span>
+            </p>
+
+            <!-- Media sosial -->
+            <!-- Facebook dan TikTok dihapus sementara karena belum ada akunnya.
+                 Tambahkan lagi ikonnya setelah punya link asli (jangan pakai href="#"). -->
+            <div class="mt-5 flex items-center gap-4">
+              <a
+                href="https://instagram.com/kedaiSajodo"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram Kedai Sajodo"
+                class="transition hover:opacity-70"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                </svg>
+              </a>
+
+              <a
+                href="#"
+                data-wa
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp Kedai Sajodo"
+                class="transition hover:opacity-70"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Menu -->
+          <nav aria-label="Menu footer">
+            <h3 class="font-['Montserrat'] text-base font-bold">Menu</h3>
+            <ul class="mt-3 space-y-2 text-xs">
+              <li><a href="#beranda" class="hover:underline">Beranda</a></li>
+              <li><a href="#produk" class="hover:underline">Produk</a></li>
+              <li><a href="#tentang" class="hover:underline">Tentang</a></li>
+              <li>
+                <a href="#keunggulan" class="hover:underline">Keunggulan</a>
+              </li>
+              <li>
+                <a href="#cara-pemesanan" class="hover:underline"
+                  >Cara Pemesanan</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <!-- Kontak -->
+          <div>
+            <h3 class="font-['Montserrat'] text-base font-bold">Kontak</h3>
+            <ul class="mt-3 space-y-2 text-xs leading-relaxed">
+              <li>
+                <a
+                  href="#"
+                  data-wa
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:underline"
+                  >+62 831-4337-2117</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://instagram.com/kedaiSajodo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:underline"
+                  >@kedaiSajodo</a
+                >
+              </li>
+              <li>
+                <address class="not-italic">
+                  Jl. Cibiru Hilir No.23, RT.01/RW.02, Cibiru Hilir, Kec.
+                  Cileunyi, Kota Bandung, Jawa Barat 40626
+                </address>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Jam buka + tombol -->
+          <div>
+            <h3 class="font-['Montserrat'] text-base font-bold">Jam Buka</h3>
+            <p class="mt-3 text-xs leading-relaxed">
+              Setiap Hari<br />10:00 - 22:00
+            </p>
+
+            <a
+              href="#"
+              data-wa
+              data-pesan="Halo Kedai Sajodo, saya mau pesan"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-sm mt-6 gap-2 border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                />
+              </svg>
+              Pesan via WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Hak cipta -->
+        <div class="mt-10 border-t border-[#4E3020]/70 pt-4 text-xs">
+          &copy; <span id="tahun">2026</span> Kedai Sajodo. Seluruh hak cipta
+          dilindungi.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // ============ PENGATURAN ============
+      // Nomor WhatsApp (awali 62, tanpa 0 dan tanpa +). Cukup ubah di sini:
+      // semua tombol/link bertanda data-wa otomatis ikut berubah.
+      const NOMOR_WA = "6283143372117";
+
+      // Daftar menu: ubah, tambah, atau hapus baris di sini.
+      // kategori: "seblak" | "cemilan" | "mie" | "minuman"
+      // Simpan foto di folder img/menu/
+      const menu = [
+        {
+          nama: "Seblak Prasman",
+          harga: "Rp 5.000 - 50.000",
+          kategori: "seblak",
+          foto: "img/menu/seblak.png",
+        },
+        {
+          nama: "Mie Nyemek Spesial",
+          harga: "Rp 13.000",
+          kategori: "mie",
+          foto: "img/menu/mie_nyemek.png",
+        },
+        {
+          nama: "Basreng Cobek",
+          harga: "Rp 7.000",
+          kategori: "cemilan",
+          foto: "img/menu/basreng.png",
+        },
+        {
+          nama: "Soteng (Baso Bonteng)",
+          harga: "Rp 12.000",
+          kategori: "seblak",
+          foto: "img/menu/soteng.png",
+        },
+
+        {
+          nama: "Kwetiaw",
+          harga: "Rp 10.000",
+          kategori: "mie",
+          foto: "img/menu/kwetiaw.png",
+        },
+        // Harga Pisang Keju belum diisi: tampil "Harga menyusul". Isi kalau sudah ada.
+        {
+          nama: "Pisang Keju",
+          harga: "Rp 5.000",
+          kategori: "cemilan",
+          foto: "img/menu/pisang_goreng.png",
+        },
+        {
+          nama: "Cilok Kuah",
+          harga: "Rp 7.000",
+          kategori: "cemilan",
+          foto: "img/menu/cilok_kuah.png",
+        },
+        {
+          nama: "Tahu Cabe Merah",
+          harga: "Rp 7.000",
+          kategori: "cemilan",
+          foto: "img/menu/tahu_cabe.png",
+        },
+
+        {
+          nama: "Beng-beng",
+          harga: "Rp 6.000",
+          kategori: "minuman",
+          foto: "img/menu/bengbeng.png",
+        },
+        {
+          nama: "Milo",
+          harga: "Rp 6.000",
+          kategori: "minuman",
+          foto: "img/menu/milo.png",
+        },
+        {
+          nama: "Chocolatos",
+          harga: "Rp 6.000",
+          kategori: "minuman",
+          foto: "img/menu/chocolatos.png",
+        },
+        {
+          nama: "Max Tea",
+          harga: "Rp 6.000",
+          kategori: "minuman",
+          foto: "img/menu/teh_tarik.png",
+        },
+
+        {
+          nama: "Nutrisari",
+          harga: "Rp 6.000",
+          kategori: "minuman",
+          foto: "img/menu/nutrisari.png",
+        },
+        {
+          nama: "Tahu Krispi",
+          harga: "Rp 10.000",
+          kategori: "cemilan",
+          foto: "img/menu/tahu_krispi.png",
+        },
+        {
+          nama: "Tahu Aci",
+          harga: "Rp 10.000",
+          kategori: "cemilan",
+          foto: "img/menu/tahu_aci.png",
+        },
+        {
+          nama: "Mie Sakura",
+          harga: "Rp 13.000",
+          kategori: "mie",
+          foto: "img/menu/mie_sakura.png",
+        },
+      ];
+
+      // Gambar pengganti kalau foto menu gagal dimuat
+      const FOTO_CADANGAN =
+        "data:image/svg+xml;utf8," +
+        encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+            '<rect width="400" height="300" fill="#EADFD2"/>' +
+            '<text x="200" y="158" font-family="sans-serif" font-size="20" fill="#4E3020" text-anchor="middle">Foto segera hadir</text>' +
+            "</svg>",
+        );
+
+      // ============ WHATSAPP ============
+      // Isi href semua link bertanda data-wa dari satu nomor
+      document.querySelectorAll("a[data-wa]").forEach((a) => {
+        const pesan = a.dataset.pesan;
+        a.href =
+          "https://wa.me/" +
+          NOMOR_WA +
+          (pesan ? "?text=" + encodeURIComponent(pesan) : "");
+      });
+
+      // ============ NAVBAR HP ============
+      // Tutup dropdown setelah salah satu link dipilih
+      document.querySelectorAll("#dropdown-nav a").forEach((a) => {
+        a.addEventListener("click", () => {
+          if (document.activeElement) document.activeElement.blur();
+        });
+      });
+
+      // ============ MENU ============
+      const daftarMenu = document.getElementById("daftar-menu");
+      const filterMenu = document.getElementById("filter-menu");
+
+      // Amankan teks sebelum dimasukkan ke innerHTML
+      function esc(teks) {
+        return String(teks)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      // Satu kartu menu (komponen card daisyUI)
+      function buatKartu(item) {
+        const pesan = encodeURIComponent(
+          "Halo Kedai Sajodo, saya mau pesan " + item.nama,
+        );
+        const harga = item.harga ? "Harga " + item.harga : "Harga menyusul";
+        const nama = esc(item.nama);
+
+        return `
+          <article class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <figure class="aspect-[4/3] bg-[#EADFD2]">
+              <img src="${esc(item.foto)}" alt="${nama}" width="400" height="300" loading="lazy" decoding="async"
+                onerror="this.onerror=null;this.src=FOTO_CADANGAN;"
+                class="h-full w-full object-cover" />
+            </figure>
+            <div class="card-body flex-1 gap-1 p-4">
+              <h3 class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]">${nama}</h3>
+              <p class="text-xs text-[#2B1A10]/90">${esc(harga)}</p>
+              <div class="card-actions mt-auto pt-3">
+                <a
+                  href="https://wa.me/${NOMOR_WA}?text=${pesan}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                  aria-label="Pesan ${nama} lewat WhatsApp"
+                >Pesan</a>
+              </div>
+            </div>
+          </article>`;
+      }
+
+      function tampilkan(kategori) {
+        daftarMenu.innerHTML = menu
+          .filter((m) => kategori === "semua" || m.kategori === kategori)
+          .map(buatKartu)
+          .join("");
+      }
+
+      // Tombol filter: yang aktif berwarna cokelat
+      function tandaiAktif(kategori) {
+        filterMenu.querySelectorAll("button").forEach((tombol) => {
+          const aktif = tombol.dataset.kategori === kategori;
+          tombol.setAttribute("aria-pressed", aktif);
+          tombol.classList.toggle("bg-[#4E3020]", aktif);
+          tombol.classList.toggle("text-white", aktif);
+          tombol.classList.toggle("bg-white", !aktif);
+          tombol.classList.toggle("text-[#4E3020]", !aktif);
+        });
+      }
+
+      filterMenu.addEventListener("click", (e) => {
+        const tombol = e.target.closest("button[data-kategori]");
+        if (!tombol) return;
+        tampilkan(tombol.dataset.kategori);
+        tandaiAktif(tombol.dataset.kategori);
+      });
+
+      tampilkan("semua");
+      tandaiAktif("semua");
+
+      // ============ FOOTER ============
+      // Tahun hak cipta otomatis
+      document.getElementById("tahun").textContent = new Date().getFullYear();
+
+      // ============ PETA (dimuat saat mendekati layar) ============
+      // Google Maps embed itu berat; baru dimuat ketika pengguna hampir sampai di sana.
+      (function () {
+        const peta = document.getElementById("peta");
+        if (!peta) return;
+        const muat = () => {
+          if (!peta.src) peta.src = peta.dataset.src;
+        };
+        if ("IntersectionObserver" in window) {
+          const pengamat = new IntersectionObserver(
+            (entri) => {
+              if (entri.some((e) => e.isIntersecting)) {
+                muat();
+                pengamat.disconnect();
+              }
+            },
+            { rootMargin: "300px" },
+          );
+          pengamat.observe(peta);
+        } else {
+          muat();
+        }
+      })();
+
+      // ============ SCROLL-SPY ============
+      // Underline navbar mengikuti section yang sedang dilihat.
+      // Posisi section disimpan di cache (dihitung ulang saat ukuran halaman berubah),
+      // jadi saat scroll tidak ada pembacaan layout berulang (menghindari forced reflow).
+      (function () {
+        const sections = Array.from(
+          document.querySelectorAll("main section[id]"),
+        );
+        const linkNav = document.querySelectorAll("header .nav-link");
+        const header = document.querySelector("header");
+        let posisiSection = [];
+        let tinggiHeader = 0;
+        let menunggu = false;
+
+        function hitungPosisi() {
+          tinggiHeader = header.offsetHeight;
+          posisiSection = sections.map((el) => ({
+            id: el.id,
+            atas: el.getBoundingClientRect().top + window.scrollY,
+          }));
+        }
+
+        function perbarui() {
+          menunggu = false;
+          const posisi = window.scrollY + tinggiHeader + 40;
+          let aktif = sections[0].id;
+
+          posisiSection.forEach((s) => {
+            if (s.atas <= posisi) aktif = s.id;
+          });
+
+          // Mentok di dasar halaman: pakai section terakhir
+          const dasar =
+            window.innerHeight + window.scrollY >=
+            document.documentElement.scrollHeight - 2;
+          if (dasar) aktif = sections[sections.length - 1].id;
+
+          linkNav.forEach((a) => {
+            const cocok = a.getAttribute("href") === "#" + aktif;
+            a.classList.toggle("nav-aktif", cocok);
+            if (cocok) a.setAttribute("aria-current", "location");
+            else a.removeAttribute("aria-current");
+          });
+        }
+
+        function jadwalkan() {
+          if (menunggu) return;
+          menunggu = true;
+          requestAnimationFrame(perbarui);
+        }
+
+        window.addEventListener("scroll", jadwalkan, { passive: true });
+
+        // Hitung ulang posisi saat tinggi halaman berubah (gambar selesai dimuat, filter menu, resize)
+        if ("ResizeObserver" in window) {
+          new ResizeObserver(() => {
+            hitungPosisi();
+            jadwalkan();
+          }).observe(document.body);
+        } else {
+          window.addEventListener("resize", () => {
+            hitungPosisi();
+            jadwalkan();
+          });
+        }
+
+        hitungPosisi();
+        perbarui();
+      })();
+    </script>
+  </body>
+</html>

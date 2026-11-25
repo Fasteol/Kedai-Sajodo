@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+/* Font Montserrat di-host sendiri (subset latin, variable weight) */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../fonts/montserrat-latin-wght-normal.woff2") format("woff2");
+}
+
+/* Underline navbar: transparan secara default, muncul saat link aktif */
+.nav-link {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.25s ease;
+}
+.nav-link.nav-aktif {
+  text-decoration-color: currentColor;
+}
