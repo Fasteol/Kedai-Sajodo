@@ -9,13 +9,18 @@
       content="Pilih menu makanan dan minuman favoritmu di Kedai Sajodo, lalu kirim pesanan langsung lewat WhatsApp. Tanpa antre, tanpa ribet."
     />
     <meta name="theme-color" content="#C89B72" />
+    <link rel="canonical" href="https://kedai-sajodo.netlify.app/" />
     <link rel="icon" type="image/svg+xml" href="img/logo.svg" />
 
-    <!-- Open Graph (pratinjau saat link dibagikan).
-         Tambahkan og:image dan og:url dengan alamat lengkap (https://...) setelah situs dipublikasikan -->
+    <!-- Open Graph (pratinjau saat link dibagikan) -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="id_ID" />
     <meta property="og:site_name" content="Kedai Sajodo" />
+    <meta property="og:url" content="https://kedai-sajodo.netlify.app/" />
+    <meta
+      property="og:image"
+      content="https://kedai-sajodo.netlify.app/img/person.png"
+    />
     <meta
       property="og:title"
       content="Kedai Sajodo | Pesan Jajan Lewat WhatsApp"
@@ -34,7 +39,7 @@
         "description": "Kedai seblak, mie, basreng, tahu krispi, dan aneka cemilan. Pesan lewat WhatsApp untuk take away atau datang langsung untuk dine in.",
         "telephone": "+6283143372117",
         "servesCuisine": ["Indonesian", "Seblak", "Snack"],
-        "priceRange": "Rp5.000 - Rp50.000",
+        "priceRange": "Rp5.000 - Rp20.000",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Jl. Cibiru Hilir No.23, RT.01/RW.02, Cibiru Hilir, Kec. Cileunyi",
@@ -64,7 +69,7 @@
             "closes": "22:00"
           }
         ],
-        "sameAs": ["https://instagram.com/kedaiSajodo"]
+        "sameAs": ["https://instagram.com/kedaisajodo_"]
       }
     </script>
 
@@ -149,7 +154,7 @@
             <!-- Tombol WhatsApp versi HP (di desktop tombolnya ada di kanan navbar) -->
             <li class="mt-2">
               <a
-                href="#"
+                href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan"
                 data-wa
                 data-pesan="Halo Kedai Sajodo, saya mau pesan"
                 target="_blank"
@@ -232,7 +237,7 @@
 
         <!-- Tombol WhatsApp versi desktop (di HP pindah ke menu hamburger) -->
         <a
-          href="#"
+          href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan"
           data-wa
           data-pesan="Halo Kedai Sajodo, saya mau pesan"
           target="_blank"
@@ -483,13 +488,609 @@
             </button>
           </div>
 
-          <!-- Daftar kartu menu (diisi otomatis oleh script di bagian bawah halaman).
-               min-h menahan tinggi area supaya halaman tidak "melompat" saat kartu muncul -->
+          <!-- Daftar kartu menu. Kartu awal ditulis langsung di HTML (terbaca mesin pencari
+               dan saat JavaScript mati); script di bawah hanya dipakai untuk filter kategori.
+               Kalau mengubah menu, ubah juga array "menu" di script (atau hasilnya akan tertimpa saat filter dipakai). -->
           <div
             id="daftar-menu"
             aria-live="polite"
             class="mt-8 min-h-[32rem] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-x-6 lg:gap-y-8"
-          ></div>
+          >
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/seblak.png"
+                  alt="Seblak Prasman"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Seblak Prasman
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">
+                  Mulai Rp 5.000, sesuai topping pilihanmu
+                </p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Seblak%20Prasman"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Seblak Prasman lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/mie_nyemek.png"
+                  alt="Mie Nyemek Spesial"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Mie Nyemek Spesial
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 13.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Mie%20Nyemek%20Spesial"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Mie Nyemek Spesial lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/basreng.png"
+                  alt="Basreng Cobek"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Basreng Cobek
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 7.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Basreng%20Cobek"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Basreng Cobek lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/soteng.png"
+                  alt="Soteng (Baso Bonteng)"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Soteng (Baso Bonteng)
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 12.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Soteng%20%28Baso%20Bonteng%29"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Soteng (Baso Bonteng) lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/kwetiaw.png"
+                  alt="Kwetiaw"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Kwetiaw
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 10.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Kwetiaw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Kwetiaw lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/pisang_goreng.png"
+                  alt="Pisang Keju"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Pisang Keju
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 5.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Pisang%20Keju"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Pisang Keju lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/cilok_kuah.png"
+                  alt="Cilok Kuah"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Cilok Kuah
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 7.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Cilok%20Kuah"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Cilok Kuah lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/tahu_cabe.png"
+                  alt="Tahu Cabe Merah"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Tahu Cabe Merah
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 7.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Tahu%20Cabe%20Merah"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Tahu Cabe Merah lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/bengbeng.png"
+                  alt="Beng-beng"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Beng-beng
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 6.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Beng-beng"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Beng-beng lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/milo.png"
+                  alt="Milo"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Milo
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 6.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Milo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Milo lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/chocolatos.png"
+                  alt="Chocolatos"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Chocolatos
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 6.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Chocolatos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Chocolatos lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/teh_tarik.png"
+                  alt="Max Tea"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Max Tea
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 6.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Max%20Tea"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Max Tea lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/nutrisari.png"
+                  alt="Nutrisari"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Nutrisari
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 6.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Nutrisari"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Nutrisari lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/tahu_krispi.png"
+                  alt="Tahu Krispi"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Tahu Krispi
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 10.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Tahu%20Krispi"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Tahu Krispi lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/tahu_aci.png"
+                  alt="Tahu Aci"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Tahu Aci
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 10.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Tahu%20Aci"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Tahu Aci lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              class="card h-full bg-white border border-[#D9B89A] shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <figure class="aspect-[4/3] bg-[#EADFD2]">
+                <img
+                  src="img/menu/mie_sakura.png"
+                  alt="Mie Sakura"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="
+                    this.onerror = null;
+                    this.src = FOTO_CADANGAN;
+                  "
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <div class="card-body flex-1 gap-1 p-4">
+                <h3
+                  class="card-title font-['Montserrat'] text-sm leading-snug text-[#1B1007]"
+                >
+                  Mie Sakura
+                </h3>
+                <p class="text-xs text-[#2B1A10]/90">Harga Rp 13.000</p>
+                <div class="card-actions mt-auto pt-3">
+                  <a
+                    href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan%20Mie%20Sakura"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm border-0 bg-[#4E3020] text-white hover:bg-[#3A2417]"
+                    aria-label="Pesan Mie Sakura lewat WhatsApp"
+                    >Pesan</a
+                  >
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -548,7 +1149,7 @@
                 class="mt-4 text-sm leading-relaxed text-[#2B1A10] sm:text-base"
               >
                 Di Kedai Sajodo, kamu bisa menikmati seblak, mie, basreng, tahu
-                crispy, dan aneka cemilan lainnya dengan rasa yang nendang dan
+                krispi, dan aneka cemilan lainnya dengan rasa yang nendang dan
                 harga yang bersahabat. Datang langsung untuk dine in, atau pesan
                 lewat WhatsApp untuk take away.
               </p>
@@ -923,7 +1524,7 @@
                  Tambahkan lagi ikonnya setelah punya link asli (jangan pakai href="#"). -->
             <div class="mt-5 flex items-center gap-4">
               <a
-                href="https://instagram.com/kedaiSajodo"
+                href="https://instagram.com/kedaisajodo_"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram Kedai Sajodo"
@@ -947,7 +1548,7 @@
               </a>
 
               <a
-                href="#"
+                href="https://wa.me/6283143372117"
                 data-wa
                 target="_blank"
                 rel="noopener noreferrer"
@@ -993,7 +1594,7 @@
             <ul class="mt-3 space-y-2 text-xs leading-relaxed">
               <li>
                 <a
-                  href="#"
+                  href="https://wa.me/6283143372117"
                   data-wa
                   target="_blank"
                   rel="noopener noreferrer"
@@ -1003,11 +1604,11 @@
               </li>
               <li>
                 <a
-                  href="https://instagram.com/kedaiSajodo"
+                  href="https://instagram.com/kedaisajodo_"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="hover:underline"
-                  >@kedaiSajodo</a
+                  >@kedaisajodo_</a
                 >
               </li>
               <li>
@@ -1023,11 +1624,11 @@
           <div>
             <h3 class="font-['Montserrat'] text-base font-bold">Jam Buka</h3>
             <p class="mt-3 text-xs leading-relaxed">
-              Setiap Hari<br />10:00 - 22:00
+              Setiap Hari<br />10.00 - 22.00
             </p>
 
             <a
-              href="#"
+              href="https://wa.me/6283143372117?text=Halo%20Kedai%20Sajodo%2C%20saya%20mau%20pesan"
               data-wa
               data-pesan="Halo Kedai Sajodo, saya mau pesan"
               target="_blank"
@@ -1070,7 +1671,7 @@
       const menu = [
         {
           nama: "Seblak Prasman",
-          harga: "Rp 5.000 - 50.000",
+          harga: "Mulai Rp 5.000, sesuai topping pilihanmu",
           kategori: "seblak",
           foto: "img/menu/seblak.png",
         },
@@ -1099,7 +1700,6 @@
           kategori: "mie",
           foto: "img/menu/kwetiaw.png",
         },
-        // Harga Pisang Keju belum diisi: tampil "Harga menyusul". Isi kalau sudah ada.
         {
           nama: "Pisang Keju",
           harga: "Rp 5.000",
@@ -1217,7 +1817,11 @@
         const pesan = encodeURIComponent(
           "Halo Kedai Sajodo, saya mau pesan " + item.nama,
         );
-        const harga = item.harga ? "Harga " + item.harga : "Harga menyusul";
+        const harga = item.harga
+          ? item.harga.startsWith("Mulai")
+            ? item.harga
+            : "Harga " + item.harga
+          : "Harga menyusul";
         const nama = esc(item.nama);
 
         return `
@@ -1269,7 +1873,7 @@
         tandaiAktif(tombol.dataset.kategori);
       });
 
-      tampilkan("semua");
+      // Kartu "Semua" sudah ada di HTML, jadi cukup tandai tombolnya.
       tandaiAktif("semua");
 
       // ============ FOOTER ============
